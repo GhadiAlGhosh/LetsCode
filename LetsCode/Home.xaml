@@ -1,0 +1,127 @@
+﻿<Page
+    x:Class="LetsCode.Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LetsCode"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Windows10version1903="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 8)" xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+ 
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Width="1500"
+                Height="45"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                VerticalAlignment="Top">
+            </StackPanel>
+            <TextBox
+                Width="300"
+                Height="40"
+                Margin="0,5,0,0"
+                BorderBrush="LightGray"
+                BorderThickness="0.5"
+                PlaceholderText="Search For Language"
+                PlaceholderForeground="Gray"
+                FontSize="14"
+                Background="White"
+                Grid.Column="1"
+                Grid.Row="0"/>
+            <TextBlock
+                Text="Hello Heroes, lets Learn Coding"
+                Style="{StaticResource HeaderTextBlockStyle}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Center"/>
+            <TextBlock
+                Text="Choose a language, Start learning and improve your programing skills"
+                Style="{StaticResource TitleTextBlockStyle}"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                HorizontalAlignment="Center"/>
+            <controls:ItemsRepeater
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                x:Name="OuterRepeater"
+                VerticalAlignment="Top">
+                <controls:ItemsRepeater.Layout>
+                    <controls:StackLayout Orientation="Vertical"/>
+                </controls:ItemsRepeater.Layout>
+                <controls:ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:Name="Categorytemplate" x:DataType="local:Category">
+                        <StackPanel>
+                            <TextBlock 
+                            Text="{x:Bind CategoryName}"
+                            Padding="8" 
+                            Style="{StaticResource 
+                            TitleTextBlockStyle}"/>
+                            <controls:ItemsRepeater
+                                x:Name="InnerRepeater"
+                                ItemsSource="{x:Bind CategoryItems}">
+                                <controls:ItemsRepeater.Layout>
+                                    <controls:StackLayout Orientation="Horizontal" />
+                                </controls:ItemsRepeater.Layout>
+                                <controls:ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:Name="ItemsTemplate" x:DataType="x:String">
+                                        <Grid Background="{StaticResource SystemControlBackgroundAccentBrush}" Margin="10, 0, 10 10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock 
+                                                Padding="10" 
+                                                Text="{x:Bind}" 
+                                                Foreground="{StaticResource SystemControlForegroundAltHighBrush}" 
+                                                FontSize="24"
+                                                HorizontalAlignment="Center" 
+                                                TextWrapping="Wrap" 
+                                                Width="150"
+                                                Height="50"
+                                                VerticalAlignment="Center"/>
+                                            <TextBlock 
+                                                Grid.Row="1"
+                                                Text="Learn More" 
+                                                TextDecorations="Underline"
+                                                Padding="10"
+                                                Foreground="{StaticResource SystemControlForegroundAltHighBrush}"
+                                                Tapped="TextBlock_Tapped"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:ItemsRepeater.ItemTemplate>
+                            </controls:ItemsRepeater>
+                        </StackPanel>
+                    </DataTemplate>
+                </controls:ItemsRepeater.ItemTemplate>
+            </controls:ItemsRepeater>
+        </Grid>
+        <controls:TeachingTip
+            x:Name="TeachingTip"                   
+	        Title="Lets Learn Coding"
+	        Subtitle="Start learning new language for only $9.99 and build your first app"
+	        PreferredPlacement="Center"                                              
+	        PlacementMargin="20"
+	        IsLightDismissEnabled="True"
+	        ActionButtonClick="TeachingTip_ActionButtonClick"
+	        ActionButtonContent="Register"
+	        CloseButtonContent="later">
+        </controls:TeachingTip>
+    </Grid>
+</Page>
